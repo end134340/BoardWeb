@@ -41,29 +41,28 @@ public class MainServlet extends HttpServlet {
 //		BoardDAO dao = new BoardDAO();
 //		List<BoardVO> list = dao.boardList();
 		SqlSessionFactory sqlSessionFactory = DataSource.getInstance();
-		
-		try (SqlSession session = sqlSessionFactory.openSession()) {
-			  List<BoardVO> list = session.selectList("com.yedam.mapper.BoardMapper.selectBoard");
-			
 
-		PrintWriter out = resp.getWriter();
-		String html = "<h3>게시글 목록</h3>";
-		html += "<table border = '2'>";
-		html += "<thead><tr><th>글번호</th><th>작성자</th><th>작성일시</th><th>제목</th><th>내용</th></tr></thead>";
-		html += "<tbody>";
-		for (BoardVO board : list) {
-			html += "<tr>";
-			html += "<td>" + board.getBoardNo() + "</td>";
-			html += "<td>" + board.getWriter() + "</td>";
-			html += "<td>" + board.getWriteDate() + "</td>";
-			html += "<td>" + board.getTitle() + "</td>";
-			html += "<td>" + board.getContent() + "</td>";
-			html += "</tr>";
+		try (SqlSession session = sqlSessionFactory.openSession()) {
+			List<BoardVO> list = session.selectList("com.yedam.mapper.BoardMapper.selectBoard");
+
+			PrintWriter out = resp.getWriter();
+			String html = "<h3>게시글 목록</h3>";
+			html += "<table border = '2'>";
+			html += "<thead><tr><th>글번호</th><th>제목</th><th>작성자</th><th>작성일시</th></tr></thead>";
+			html += "<tbody>";
+			for (BoardVO board : list) {
+				html += "<tr>";
+				html += "<td>" + board.getBoardNo() + "</td>";
+				html += "<td><a href='getBoard?board_no=" + board.getBoardNo() + "'>" + board.getTitle() + "</a></td>";
+				html += "<td>" + board.getWriter() + "</td>";
+				html += "<td>" + board.getWriteDate() + "</td>";
+				html += "</tr>";
+			}
+			html += "</tobody></table>";
+			out.print(html);
 		}
-		html += "</tobody></table>";
-		out.print(html);
 	}
-}
+
 	@Override
 	public void destroy() {
 		System.out.println("서버 종료시 실행: destroy() 메서드 입니다");
