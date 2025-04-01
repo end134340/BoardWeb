@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <jsp:include page="includes/header.jsp" />
 	<!-- addForm.jsp -->
-	<form action="addBoard.do" method="post" accept-charset="utf-8">> <!-- 주소 표시줄에 직접 치거나 링크 누름: get방식.  -->
+	<form action="addBoard.do" method="post" accept-charset="utf-8"> <!-- 주소 표시줄에 직접 치거나 링크 누름: get방식.  -->
 		<table class="table">
 			<tr>
 				<th>글 제목</th>

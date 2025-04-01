@@ -47,10 +47,10 @@ public class Test {
 				System.out.println("실행에 성공했습니다.");
 				sqlSession.commit();
 			}
-			List<BoardVO> list = mapper.selectBoard();
-			for (BoardVO brd : list) {
-				System.out.println(brd.toString());
-			}
+//			List<BoardVO> list = mapper.selectBoard(1);
+//			for (BoardVO brd : list) {
+//				System.out.println(brd.toString());
+//			}
 
 		} catch (Exception e) {
 			e.printStackTrace();

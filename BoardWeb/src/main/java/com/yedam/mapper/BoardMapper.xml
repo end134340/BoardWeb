@@ -3,26 +3,48 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yedam.mapper.BoardMapper">
-	<select id="selectBoard" resultType="board">
-		SELECT board_no
-		       , title
-		       , writer
-		       , content
-		       , write_date
-		FROM   tbl_board
-		ORDER BY board_no DESC
+	<select id="selectBoard" resultType="board" parameterType="search">
+		SELECT b.*
+		FROM ( SELECT rownum rn, a.* 
+		        FROM ( SELECT board_no
+		                      , title
+		                      , content
+		                      , writer
+		                      , write_date
+		               FROM   tbl_board
+		         <!-- mapper 안에서의 조건문. -->
+		               <choose>
+		               	<when test="searchCondition == 'T'.toString">
+		               WHERE  title like '%' || #{keyword}|| '%'
+		               	</when>
+		               	<when test="searchCondition == 'W'.toString">
+		               WHERE  writer like '%' || #{keyword}|| '%'
+		              	</when>
+		              	<when test="searchCondition == 'TW'.toString">
+		               WHERE  title like '%' || #{keyword}|| '%'
+		                 OR   writer like '%' || #{keyword}|| '%'
+		               	</when>
+		               </choose>
+		               ORDER BY board_no DESC ) a
+		      ) b
+		WHERE b.rn > ( #{page} - 1) * 10
+		<![CDATA[
+		AND b.rn <= ( #{page} * 10 )
+		]]>
+		<!-- 여는 꺽쇠는 tag로 인식하기 때문에 CDATA라고 하는 태그로 감싸줘야 함 -->
 	</select>
 
 	<!--등록 -->
 	<insert id="insertBoard" parameterType="board">
-		INSERT INTO tbl_board(board_no 
-		                      , title 
-		                      , content
-		                      , writer )
+		INSERT INTO
+		tbl_board(board_no
+		          , title
+		          , content
+		          , writer )
 		VALUES (board_seq.nextval
-		       , #{title} 
-		       , #{content} 
-		       , #{writer} )
+		        , #{title}
+		        , #{content}
+		        , #{writer} )
 	</insert>
 
 	<!--수정 -->
@@ -40,14 +62,32 @@
 		DELETE FROM tbl_board
 		WHERE board_no = #{boardNo}
 	</delete>
+
+	<select id="selectOneBoard" parameterType="int"
+		resultType="board">
+		SELECT board_no
+		, title
+		, writer
+		, content
+		, write_date
+		FROM tbl_board
+		WHERE board_no = #{boardNo}
+	</select>
 	
-	<select id="selectOneBoard" parameterType="int" resultType="board">
-		SELECT board_no 
-		       , title 
-		       , writer 
-		       , content 
-		       , write_date 
-		FROM   tbl_board 
-		WHERE  board_no = #{boardNo}
+	<select id="selectTotal" resultType="int" parameterType="search">
+		SELECT COUNT(1)
+		FROM   tbl_board
+		 <choose>
+		  <when test="searchCondition == 'T'.toString">
+		   WHERE  title like '%' || #{keyword}|| '%'
+		  </when>
+		  <when test="searchCondition == 'W'.toString">
+		   WHERE  writer like '%' || #{keyword}|| '%'
+		  </when>
+		  <when test="searchCondition == 'TW'.toString">
+		   WHERE  title like '%' || #{keyword}|| '%'
+		   OR   writer like '%' || #{keyword}|| '%'
+		  </when>
+		 </choose>
 	</select>
 </mapper>

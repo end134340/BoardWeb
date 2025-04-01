@@ -30,11 +30,11 @@ public class AppTest {
 			} else {
 				System.out.println("등록실패ㅠㅠ");
 			}
-			List<BoardVO> list = mapper.selectBoard();
+//			List<BoardVO> list = mapper.selectBoard(1);
 //			List<BoardVO> list = sqlSession.selectList("com.yedam.mapper.BoardMapper.selectBoard");
-			for (BoardVO brd : list) {
-				System.out.println(brd.toString());
-			}
+//			for (BoardVO brd : list) {
+//				System.out.println(brd.toString());
+//			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
