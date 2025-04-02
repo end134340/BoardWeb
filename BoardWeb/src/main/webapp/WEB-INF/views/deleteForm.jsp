@@ -4,7 +4,7 @@
 <jsp:include page="includes/header.jsp" />
 <!-- 주소 표시줄에 직접 치거나 링크 누름: get방식.  -->
 <%
-BoardVO brd = (BoardVO) request.getAttribute("board");
+BoardVO brd = (BoardVO) request.getAttribute("brd");
 int currPage = (int) request.getAttribute("page");
 %>
 <form action="deleteBoard.do" method="post" accept-charset="utf-8">
@@ -29,7 +29,7 @@ int currPage = (int) request.getAttribute("page");
 		</tr>
 		<tr>
 			<td colspan="4" align="center">
-				<input type="submit" class="btn btn-info" value="삭제"> 
+				<input type="submit" class="btn btn-danger" value="삭제"> 
 			</td>
 		</tr>
 	</table>

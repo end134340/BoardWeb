@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <jsp:include page="includes/header.jsp" />
 	<!-- addForm.jsp -->
+	<%
+	String logId = (String) session.getAttribute("logId");
+	%>
 	<form action="addBoard.do" method="post" accept-charset="utf-8"> <!-- 주소 표시줄에 직접 치거나 링크 누름: get방식.  -->
 		<table class="table">
 			<tr>
@@ -10,7 +13,7 @@
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><input type="text" name="writer" class="form-control"></td>
+				<td><%=logId%><input type="hidden" name="writer" class="form-control" value="<%=logId%>"></td>
 			</tr>
 			<tr>
 				<th>본문</th>

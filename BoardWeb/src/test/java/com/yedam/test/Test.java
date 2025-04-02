@@ -1,22 +1,26 @@
 package com.yedam.test;
 
-import java.util.List;
-
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-
-import com.yedam.common.DataSource;
-import com.yedam.mapper.BoardMapper;
-import com.yedam.vo.BoardVO;
+import com.yedam.service.MemberService;
+import com.yedam.service.MemberServiceImpl;
+import com.yedam.vo.MemberVO;
 
 public class Test {
 	public static void main(String[] arsg) {
-		SqlSessionFactory sqlSessionFactory = DataSource.getInstance();
-		BoardVO board = new BoardVO();
-		board.setTitle("1시간남음");
-		board.setContent("와~~~");
-		board.setWriter("newbie");
-		board.setBoardNo(6);
+//		SqlSession sqlSession = DataSource.getInstance().openSession();
+//		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+//		MemberVO member = mapper.selectMember("user01", "1111");
+		
+		MemberService svc = new MemberServiceImpl();
+		
+		MemberVO member = svc.login("user01", "1111");
+
+		System.out.println(member.toString());
+
+//		BoardVO board = new BoardVO();
+//		board.setTitle("1시간남음");
+//		board.setContent("와~~~");
+//		board.setWriter("newbie");
+//		board.setBoardNo(6);
 
 		// 옛날 방식
 //		try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
@@ -39,21 +43,21 @@ public class Test {
 //		}
 
 		// 현재??방식
-		try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-			BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
-
-			int r = mapper.insertBoard(board);
-			if (r == 1) {
-				System.out.println("실행에 성공했습니다.");
-				sqlSession.commit();
-			}
+//		try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+//			BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+//
+//			int r = mapper.insertBoard(board);
+//			if (r == 1) {
+//				System.out.println("실행에 성공했습니다.");
+//				sqlSession.commit();
+//			}
 //			List<BoardVO> list = mapper.selectBoard(1);
 //			for (BoardVO brd : list) {
 //				System.out.println(brd.toString());
 //			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 }

@@ -22,4 +22,6 @@ public interface BoardMapper {
 	BoardVO selectOneBoard(int boardNo);
 	
 	int selectTotal(SearchDTO search);
+	
+	
 }

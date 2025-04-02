@@ -15,6 +15,10 @@ import com.yedam.control.BoardControl;
 import com.yedam.control.BoardListControl;
 import com.yedam.control.DeleteBoardControl;
 import com.yedam.control.DeleteFormControl;
+import com.yedam.control.LoginControl;
+import com.yedam.control.LoginFormControl;
+import com.yedam.control.LogoutControl;
+import com.yedam.control.MainControl;
 import com.yedam.control.ModifyBoardControl;
 import com.yedam.control.ModifyFormControl;
 
@@ -33,6 +37,9 @@ public class FrontController extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		// /*.do라는 요청이 들어오면, Control인터페이스를 구현하는 클래스를 호출?하겠다?
+		//메인 화면
+		map.put("/main.do", new MainControl());
+		
 		//상세 화면
 		map.put("/board.do", new BoardControl());
 		//글 목록
@@ -47,6 +54,12 @@ public class FrontController extends HttpServlet {
 		map.put("/deleteForm.do", new DeleteFormControl());
 		//삭제 처리
 		map.put("/deleteBoard.do", new DeleteBoardControl());
+		//로그인 페이지로 연결
+		map.put("/loginForm.do", new LoginFormControl());
+		//로그인 처리
+		map.put("/login.do", new LoginControl());
+		//로그아웃
+		map.put("/logout.do", new LogoutControl());
 		
 	}
 

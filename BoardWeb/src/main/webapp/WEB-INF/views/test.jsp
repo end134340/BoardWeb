@@ -24,17 +24,16 @@
 	//java영역이기 때문에 여기서도 이 코드를 쓸 수 있음.
 	SqlSession sqlSession = DataSource.getInstance().openSession();
 	BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
-	List<BoardVO> list = mapper.selectBoard();
+	//List<BoardVO> list = mapper.selectBoard();
 	%>
 	<h3>글 목록</h3>
 	<ul>
 		<%
-		for (BoardVO board : list) {
+		//for (BoardVO board : list) {
 		%>
-		<li>글 번호(<%=board.getBoardNo()%>) / 글 제목(<%=board.getTitle()%>)
 		</li>
 		<%
-		}
+		//}
 		%>
 	</ul>
 
