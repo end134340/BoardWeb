@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!-- jsp에서 제공해주는 액션 태그 -->
-<jsp:include page="includes/header.jsp" />
+<%-- <jsp:include page="includes/header.jsp" /> --%>
 
 <form action="modifyForm.do">
 	<input type="hidden" name="bno" value="${brd.boardNo}"> 
@@ -58,4 +58,4 @@ function deleteFnc(){
 	location.href = 'deleteForm.do?bno=${brd.boardNo}&page=${page}';
 	}
 </script>
-<jsp:include page="includes/footer.jsp" />
+<%-- <jsp:include page="includes/footer.jsp" /> --%>

@@ -3,7 +3,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<jsp:include page="includes/header.jsp" />
 <!-- 주소 표시줄에 직접 치거나 링크 누름: get방식.  -->
 <form action="modifyBoard.do" method="post" accept-charset="utf-8">
 	<input type="hidden" name="bno" value="${brd.boardNo}">
@@ -36,4 +35,3 @@
 <p>
 	<a href="boardList.do">목록으로</a>
 </p>
-<jsp:include page="includes/footer.jsp" />

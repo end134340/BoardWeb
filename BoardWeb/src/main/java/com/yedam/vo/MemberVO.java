@@ -12,4 +12,5 @@ public class MemberVO {
 	private String password;
 	private String userName;
 	private String responsibility;
+	private String images;
 }

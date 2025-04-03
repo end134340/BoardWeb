@@ -2,15 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yedam.mapper.MemberMapper">
 
-	<select id="selectMember" resultType="member" >
+	<select id="selectMember" resultType="member">
 		SELECT user_id 
-		       , password
+		       , password 
 		       , user_name 
-		       , responsibility
-		FROM   tbl_member
-		WHERE  user_id = #{id}
-		 AND   password = #{pw}
+		       , responsibility 
+		       , images 
+		FROM   tbl_member 
+		WHERE  user_id = #{id} 
+		 AND   password = #{pw} 
 	</select>
 
+	<insert id="insertMember" parameterType="member">
+		INSERT INTO tbl_member ( user_id 
+		                         , password 
+		                         , user_name 
+		                         , responsibility 
+		                         , images ) 
+		VALUES ( #{userId} 
+		        , #{password} 
+		        , #{userName} 
+		        , 'user' 
+		        , #{images} )
+	</insert>
 
 </mapper>

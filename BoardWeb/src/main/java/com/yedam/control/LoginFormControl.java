@@ -14,7 +14,7 @@ public class LoginFormControl implements Control {
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 로그인 화면 열어줌
 		
-		req.getRequestDispatcher("/WEB-INF/views/loginForm.jsp").forward(req, resp);
+		req.getRequestDispatcher("common/loginForm.tiles").forward(req, resp);
 
 	}
 

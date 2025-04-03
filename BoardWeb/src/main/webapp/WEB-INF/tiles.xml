@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+  <definition name="myapp.common" template="/WEB-INF/common/template.jsp">
+    <put-attribute name="title" value="Tiles tutorial homepage" />
+    <put-attribute name="header" value="/WEB-INF/common/header.jsp" />
+    <put-attribute name="menu" value="/WEB-INF/common/menu.jsp" />
+    <put-attribute name="body" value="/WEB-INF/common/body.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/common/footer.jsp" />
+  </definition>
+  
+  <definition name="WILDCARD:common/*" extends="myapp.common">
+  	<put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
+  </definition>
+   
+  <definition name="myapp.admin" template="/WEB-INF/admin/template.jsp">
+    <put-attribute name="title" value="Tiles tutorial homepage" />
+    <put-attribute name="body" value="/WEB-INF/admin/body.jsp" />
+  </definition>
+  
+  <definition name="WILDCARD:manager/*" extends="myapp.admin">
+  	<put-attribute name="body" value="/WEB-INF/views/{1}.jsp"></put-attribute>
+  </definition>
+  
+  <!-- body영역에 이 이름을 가지고? 새로 페이지를 만든다???는?코드? -->
+  <!-- WILDCARD:*, /파일/{1}.jsp => ~.tiles로 들어오는 경로를 /파일/~~.jsp로 대응해 처리 -->
+   <!-- <definition name="WILDCARD:*" extends="myapp.homepage">
+   	<put-attribute name="body" value="/tiles/{1}.jsp"/>
+   </definition> -->
+</tiles-definitions>

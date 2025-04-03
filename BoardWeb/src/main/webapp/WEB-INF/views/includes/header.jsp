@@ -1,6 +1,6 @@
 <%@page import="com.yedam.vo.MemberVO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!-- views/includes/header.jsp -->
 <!DOCTYPE html>
 <html lang="ko">
@@ -10,16 +10,20 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>Simple Sidebar - Start Bootstrap Template</title>
+<title>게시판</title>
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="css/styles.css" rel="stylesheet" />
+<style>
+	.iconimg {
+	 border-radius : 50%;
+	 width: 30px;
+	 height: 30px;
+	}
+</style>
 </head>
 <body>
-<% 
-	String logId = (String) session.getAttribute("logId");
-%>
 
 	<div class="d-flex" id="wrapper">
 		<!-- Sidebar-->
@@ -27,20 +31,21 @@
 			<div class="sidebar-heading border-bottom bg-light">Start
 				Bootstrap</div>
 			<div class="list-group list-group-flush">
-				<a
-					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="boardList.do">글 목록</a> 
-					<% if(logId == null){ %>
+				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardList.do">글 목록</a> 
+					<c:choose>
+					<c:when test="${logId == null }">
 					<a class="list-group-item list-group-item-action list-group-item-light p-3"
 					href="loginForm.do">로그인</a> 
-					<% } else { %>
+					</c:when>
+					<c:otherwise>
 					<a class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="logout.do">로그아웃(<%=logId %>)</a>
+					href="logout.do">로그아웃(${logId})</a>
 					<a class="list-group-item list-group-item-action list-group-item-light p-3"
 					href="addBoard.do">등록 화면</a> 
-					<% } %> 
+					</c:otherwise>
+					</c:choose>
 					<a class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="#!">Profile</a> 
+					href="signForm.do">회원가입</a> 
 					<a class="list-group-item list-group-item-action list-group-item-light p-3"
 					href="#!">Status</a>
 			</div>
@@ -51,8 +56,7 @@
 			<nav
 				class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
 				<div class="container-fluid">
-					<button class="btn btn-primary" id="sidebarToggle">Toggle
-						Menu</button>
+					<button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
 					<button class="navbar-toggler" type="button"
 						data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 						aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -63,14 +67,22 @@
 						<ul class="navbar-nav ms-auto mt-2 mt-lg-0">
 							<li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
 							<li class="nav-item"><a class="nav-link" href="#!">Link</a></li>
-							<li class="nav-item dropdown"><a
-								class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
-								role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false">Dropdown</a>
-								<div class="dropdown-menu dropdown-menu-end"
-									aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="#!">Action</a> <a
-										class="dropdown-item" href="#!">Another action</a>
+							
+							<li class="nav-item dropdown">
+							<c:choose>
+								<c:when test="${!empty img}">
+									<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="iconimg" src="images/${img}"></a>
+								</c:when>
+								<c:when test="${empty logId}">
+								<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+								</c:when>
+								<c:otherwise>
+									<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="iconimg" src="images/noimg.webp"></a>
+								</c:otherwise> 
+							</c:choose>
+							
+								<div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="#!">Action</a> <a class="dropdown-item" href="#!">Another action</a>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="#!">Something else here</a>
 								</div></li>

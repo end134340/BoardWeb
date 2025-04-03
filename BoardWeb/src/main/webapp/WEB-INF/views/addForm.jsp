@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="includes/header.jsp" />
 	<!-- addForm.jsp -->
 	<%
 	String logId = (String) session.getAttribute("logId");
@@ -13,7 +12,7 @@
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><%=logId%><input type="hidden" name="writer" class="form-control" value="<%=logId%>"></td>
+				<td>${logId}<input type="hidden" name="writer" class="form-control" value="${logId}"></td>
 			</tr>
 			<tr>
 				<th>본문</th>
@@ -25,4 +24,3 @@
 			</tr>
 		</table>
 	</form>
-<jsp:include page="includes/footer.jsp" />

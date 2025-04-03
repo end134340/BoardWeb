@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="includes/header.jsp" />
+<%-- <jsp:include page="includes/header.jsp" /> --%>
 <!-- webapp/WEB-INF/views/boardList.jsp -->
 <%
 //request: jsp가 가지고 있는 내장 객체(요청 정보 값을 가지고 있는 객체)
@@ -113,4 +113,4 @@ SearchDTO search = (SearchDTO) request.getAttribute("search"); */
 		document.querySelector('#keyword').value = kw;
 	}
 </script>
-<jsp:include page="includes/footer.jsp" />
+<%-- <jsp:include page="includes/footer.jsp" /> --%>
