@@ -14,6 +14,6 @@
 		<a class="list-group-item list-group-item-action list-group-item-light p-3" href="addBoard.do">등록 화면</a> 
 		</c:otherwise>
 		</c:choose>
-		<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
+		<a class="list-group-item list-group-item-action list-group-item-light p-3" href="javascript.do">JS연습</a>
     </div>
 </div>
