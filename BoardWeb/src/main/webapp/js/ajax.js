@@ -6,7 +6,7 @@ const xhtp = new XMLHttpRequest(); //서버상의... 페이지의 데이터를 �
 xhtp.open('get', 'data/MOCK_DATA.json');
 xhtp.send(); //읽어오는 메소드
 xhtp.onload = function() { //로드 이벤트가 발생하면 함수 실행
-	let obj = JSON.parse(xhtp.responseText);
+	let obj = JSON.parse(xhtp.responseText); //json형태의 문자열을 obj로 만드는 메소드
 	console.log(obj);
 	dataAry = obj;
 	obj.forEach(function(item, idx, ary) {

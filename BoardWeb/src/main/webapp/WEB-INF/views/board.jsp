@@ -45,10 +45,43 @@
 		</c:if>
 	</table>
 </form>
-<p>
-	<a href="boardList.do">목록으로</a>
-</p>
+<!-- 댓글 관련 -->
+<style>
+div.reply span{
+	display: inline-block;
+}
+div.reply ul {
+	list-style: none;
+}
+div.content ul li{
+	margin-bottom: 5px;
+}
+</style>
+<div class="container reply">
+	<!-- 등록 -->
+	<div class="header">
+		<input class="col-sm-8" id="reply">
+		<button class="col-sm-2 btn btn-primary" id="addReply">등록</button>
+	</div>
+	<!-- 목록 -->
+	<div class="content">
+		<ul>
+		 <li>
+		 	<span class="col-sm-2">no.</span>
+		 	<span class="col-sm-5">내용</span>
+		 	<span class="col-sm-2">작성자</span>
+		 	<span class="col-sm-2"></span>
+		 	
+		 </li>
+		</ul>
+	</div>
+		
+	<!-- 페이징 -->
+</div>
+<!-- 댓글관련 끝 -->
 <script>
+const bno = "${brd.boardNo}";
+const replyer = "${logId}";
 let btn = document.querySelector('#delBtn');
 btn.addEventListener('click', deleteFnc);
 
@@ -58,4 +91,8 @@ function deleteFnc(){
 	location.href = 'deleteForm.do?bno=${brd.boardNo}&page=${page}';
 	}
 </script>
+<script src="js/boardService.js"></script>
+<!-- <script src="js/board.js"></script> -->
+<script src="js/board1.js"></script>
+
 <%-- <jsp:include page="includes/footer.jsp" /> --%>

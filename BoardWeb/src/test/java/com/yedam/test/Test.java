@@ -1,8 +1,15 @@
 package com.yedam.test;
 
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.yedam.common.DataSource;
+import com.yedam.mapper.ReplyMapper;
 import com.yedam.service.MemberService;
 import com.yedam.service.MemberServiceImpl;
 import com.yedam.vo.MemberVO;
+import com.yedam.vo.ReplyVO;
 
 public class Test {
 	public static void main(String[] arsg) {
@@ -14,7 +21,26 @@ public class Test {
 		
 		MemberVO member = svc.login("user01", "1111");
 
-		System.out.println(member.toString());
+//		System.out.println(member.toString());
+		
+		SqlSession sqlSession = DataSource.getInstance().openSession(true);
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		
+		ReplyVO rvo = new ReplyVO();
+		rvo.setBoardNo(234);
+		rvo.setReply("매퍼 테스트 중~~");
+		rvo.setReplyer("kanu");
+		
+		int cnt = mapper.insertReply(rvo);
+		
+		if(cnt > 0) {
+			System.out.println("댓글이 등록되었습니다.");
+		}
+		
+		List<ReplyVO> list = mapper.selectList(234);
+		for(ReplyVO reply : list) {
+			System.out.println(reply.toString());
+		}
 
 //		BoardVO board = new BoardVO();
 //		board.setTitle("1시간남음");
