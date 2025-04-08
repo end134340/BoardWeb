@@ -49,7 +49,7 @@ public class Test {
 		// {"data":[[], [], [], []]
 		
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("data", slist);
+		result.put("data", list);
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String json = gson.toJson(result);
 		System.out.println(json);
