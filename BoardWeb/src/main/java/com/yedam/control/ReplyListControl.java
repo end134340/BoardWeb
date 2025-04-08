@@ -7,9 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.yedam.common.Control;
+import com.yedam.common.SearchDTO;
 import com.yedam.service.ReplyService;
 import com.yedam.service.ReplyServiceImpl;
 import com.yedam.vo.ReplyVO;
@@ -23,11 +22,15 @@ public class ReplyListControl implements Control {
 		// 글 번호에 대한 댓글 데이터를 json 형태로 만듦
 
 		String bno = req.getParameter("bno");
-
+		String page = req.getParameter("page"); //댓글 페이지네이션을 하기 위해서 페이지를 받음
+		
 		// 서비스에 등록된 업무 로직 호출
 		ReplyService svc = new ReplyServiceImpl();
+		SearchDTO search = new SearchDTO();
+		search.setBoardNo(Integer.parseInt(bno));
+		search.setPage(Integer.parseInt(page));
 
-		List<ReplyVO> list = svc.replyList(Integer.parseInt(bno));
+		List<ReplyVO> list = svc.replyList(search);
 		// Json형태의 문자열: [{"replyNo": 10, "reply": "댓글" … }]
 
 		String json = "[";

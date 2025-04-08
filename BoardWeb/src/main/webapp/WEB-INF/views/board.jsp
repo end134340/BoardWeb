@@ -77,6 +77,21 @@ div.content ul li{
 	</div>
 		
 	<!-- 페이징 -->
+	<nav aria-label="...">
+  <ul class="pagination pagination-sm justify-content-center">
+   <!--  <li class="page-item disabled">
+      <span class="page-link">Previous</span>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item active" aria-current="page">
+      <span class="page-link">2</span>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li> -->
+  </ul>
+</nav>
 </div>
 <!-- 댓글관련 끝 -->
 <script>
@@ -91,8 +106,9 @@ function deleteFnc(){
 	location.href = 'deleteForm.do?bno=${brd.boardNo}&page=${page}';
 	}
 </script>
-<script src="js/boardService.js"></script>
+<script src="js/board2.js"></script>
+<!-- <script src="js/boardService.js"></script> -->
 <!-- <script src="js/board.js"></script> -->
-<script src="js/board1.js"></script>
+<!-- <script src="js/board1.js"></script> -->
 
 <%-- <jsp:include page="includes/footer.jsp" /> --%>

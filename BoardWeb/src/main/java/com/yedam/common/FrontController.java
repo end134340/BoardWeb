@@ -23,7 +23,9 @@ import com.yedam.control.LogoutControl;
 import com.yedam.control.MainControl;
 import com.yedam.control.ModifyBoardControl;
 import com.yedam.control.ModifyFormControl;
+import com.yedam.control.RLDatatableControl;
 import com.yedam.control.RemoveReplyControl;
+import com.yedam.control.ReplyCountControl;
 import com.yedam.control.ReplyListControl;
 import com.yedam.control.SignUpControl;
 
@@ -79,6 +81,11 @@ public class FrontController extends HttpServlet {
 		map.put("/removeReply.do", new RemoveReplyControl());
 		//등록
 		map.put("/addReply.do", new AddReplyControl());
+		//페이지 수 조회
+		map.put("/replyCount.do", new ReplyCountControl());
+		
+		//datatable을 이용해서 데이터 출력
+		map.put("/replyListDatatable.do", new RLDatatableControl());
 		
 	}
 

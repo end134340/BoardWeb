@@ -49,7 +49,7 @@ public class BoardListControl implements Control {
 		// boardList.do 를 호출하면 BoardListControl이 실행되어 결과를 jsp에 담아 그 jsp 페이지를 출력하고자 함
 		// req.getRequestDispatcher: 요청(페이지)을 재지정하겠다는 기능을 가진 메소드. 다른 페이지를 열겠다는 뜼?
 //		req.getRequestDispatcher("/WEB-INF/views/boardList.jsp").forward(req, resp);
-		req.getRequestDispatcher("common/boardList.tiles").forward(req, resp);
+		req.getRequestDispatcher("common/boardList2.tiles").forward(req, resp);
 		// req: exec의 매개값
 	}
 

@@ -27,12 +27,12 @@
 		               </choose>
 		               ORDER BY board_no DESC ) a
 		      ) b
-		WHERE b.rn > ( #{page} - 1) * 10
 		<![CDATA[
-		AND b.rn <= ( #{page} * 10 )
 		]]>
 		<!-- 여는 꺽쇠는 tag로 인식하기 때문에 CDATA라고 하는 태그로 감싸줘야 함 -->
 	</select>
+		<!-- WHERE b.rn > ( #{page} - 1) * 10 -->
+		<!-- AND b.rn <= ( #{page} * 10 ) -->
 
 	<!--등록 -->
 	<insert id="insertBoard" parameterType="board">

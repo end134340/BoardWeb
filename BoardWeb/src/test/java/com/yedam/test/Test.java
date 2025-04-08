@@ -1,9 +1,14 @@
 package com.yedam.test;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.yedam.common.DataSource;
 import com.yedam.mapper.ReplyMapper;
 import com.yedam.service.MemberService;
@@ -16,31 +21,49 @@ public class Test {
 //		SqlSession sqlSession = DataSource.getInstance().openSession();
 //		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 //		MemberVO member = mapper.selectMember("user01", "1111");
-		
+
 		MemberService svc = new MemberServiceImpl();
-		
+
 		MemberVO member = svc.login("user01", "1111");
 
 //		System.out.println(member.toString());
-		
+
 		SqlSession sqlSession = DataSource.getInstance().openSession(true);
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
-		
+
 		ReplyVO rvo = new ReplyVO();
 		rvo.setBoardNo(234);
 		rvo.setReply("매퍼 테스트 중~~");
 		rvo.setReplyer("kanu");
-		
-		int cnt = mapper.insertReply(rvo);
-		
-		if(cnt > 0) {
-			System.out.println("댓글이 등록되었습니다.");
+
+		List<Map<String, Object>> list = mapper.selectListForDT(234);
+		List<List<Object>> slist = new ArrayList<List<Object>>();
+		for (int i = 0; i < list.size(); i++) {
+			List<Object> ilist = new ArrayList<Object>();
+			ilist.add(list.get(i).get("REPLY_NO"));
+			ilist.add(list.get(i).get("REPLY"));
+			ilist.add(list.get(i).get("REPLYER"));
+			slist.add(ilist);
+
 		}
+		// {"data":[[], [], [], []]
 		
-		List<ReplyVO> list = mapper.selectList(234);
-		for(ReplyVO reply : list) {
-			System.out.println(reply.toString());
-		}
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("data", slist);
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String json = gson.toJson(result);
+		System.out.println(json);
+
+//		int cnt = mapper.insertReply(rvo);
+
+//		if(cnt > 0) {
+//			System.out.println("댓글이 등록되었습니다.");
+//		}
+
+//		List<ReplyVO> list = mapper.selectList(234);
+//		for(ReplyVO reply : list) {
+//			System.out.println(reply.toString());
+//		}
 
 //		BoardVO board = new BoardVO();
 //		board.setTitle("1시간남음");
