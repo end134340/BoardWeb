@@ -16,6 +16,10 @@ import com.yedam.control.BoardControl;
 import com.yedam.control.BoardListControl;
 import com.yedam.control.DeleteBoardControl;
 import com.yedam.control.DeleteFormControl;
+import com.yedam.control.EventAddControl;
+import com.yedam.control.EventFormControl;
+import com.yedam.control.EventListControl;
+import com.yedam.control.EventRemoveControl;
 import com.yedam.control.JSControl;
 import com.yedam.control.LoginControl;
 import com.yedam.control.LoginFormControl;
@@ -86,6 +90,16 @@ public class FrontController extends HttpServlet {
 		
 		//datatable을 이용해서 데이터 출력
 		map.put("/replyListDatatable.do", new RLDatatableControl());
+		
+		//Fullcalendar 관련
+		map.put("/eventForm.do", new EventFormControl());
+		//일정 등록
+		map.put("/addEvent.do", new EventAddControl());
+		//일정 삭제
+		map.put("/removeEvent.do", new EventRemoveControl());
+		//전체 일정
+		//eventList.do => [{}, {}]
+		map.put("/eventList.do", new EventListControl());
 		
 	}
 
