@@ -1,7 +1,5 @@
 package com.yedam.test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,49 +8,52 @@ import org.apache.ibatis.session.SqlSession;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.yedam.common.DataSource;
-import com.yedam.mapper.ReplyMapper;
-import com.yedam.service.MemberService;
-import com.yedam.service.MemberServiceImpl;
-import com.yedam.vo.MemberVO;
-import com.yedam.vo.ReplyVO;
+import com.yedam.mapper.EventMapper;
 
 public class Test {
 	public static void main(String[] arsg) {
-//		SqlSession sqlSession = DataSource.getInstance().openSession();
+		SqlSession sqlSession = DataSource.getInstance().openSession();
+		
+		EventMapper mapper = sqlSession.getMapper(EventMapper.class);
+		
+		List<Map<String, Object>> list = mapper.selectWriter();
+		
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String json = gson.toJson(list);
+		System.out.println(json);
+
+		
 //		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 //		MemberVO member = mapper.selectMember("user01", "1111");
 
-		MemberService svc = new MemberServiceImpl();
+//		MemberService svc = new MemberServiceImpl();
 
-		MemberVO member = svc.login("user01", "1111");
+//		MemberVO member = svc.login("user01", "1111");
 
 //		System.out.println(member.toString());
 
-		SqlSession sqlSession = DataSource.getInstance().openSession(true);
-		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
-
-		ReplyVO rvo = new ReplyVO();
-		rvo.setBoardNo(234);
-		rvo.setReply("매퍼 테스트 중~~");
-		rvo.setReplyer("kanu");
-
-		List<Map<String, Object>> list = mapper.selectListForDT(234);
-		List<List<Object>> slist = new ArrayList<List<Object>>();
-		for (int i = 0; i < list.size(); i++) {
-			List<Object> ilist = new ArrayList<Object>();
-			ilist.add(list.get(i).get("REPLY_NO"));
-			ilist.add(list.get(i).get("REPLY"));
-			ilist.add(list.get(i).get("REPLYER"));
-			slist.add(ilist);
-
-		}
-		// {"data":[[], [], [], []]
-		
-		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("data", list);
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		String json = gson.toJson(result);
-		System.out.println(json);
+//		SqlSession sqlSession = DataSource.getInstance().openSession(true);
+//		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+//
+//		ReplyVO rvo = new ReplyVO();
+//		rvo.setBoardNo(234);
+//		rvo.setReply("매퍼 테스트 중~~");
+//		rvo.setReplyer("kanu");
+//
+//		List<Map<String, Object>> list = mapper.selectListForDT(234);
+//		List<List<Object>> slist = new ArrayList<List<Object>>();
+//		for (int i = 0; i < list.size(); i++) {
+//			List<Object> ilist = new ArrayList<Object>();
+//			ilist.add(list.get(i).get("REPLY_NO"));
+//			ilist.add(list.get(i).get("REPLY"));
+//			ilist.add(list.get(i).get("REPLYER"));
+//			slist.add(ilist);
+//
+//		}
+//		// {"data":[[], [], [], []]
+//		
+//		Map<String, Object> result = new HashMap<String, Object>();
+//		result.put("data", list);
 
 //		int cnt = mapper.insertReply(rvo);
 

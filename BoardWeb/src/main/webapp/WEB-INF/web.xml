@@ -4,6 +4,16 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
 	id="WebApp_ID" version="4.0">
 	<display-name>BoardWeb</display-name>
+
+	<filter>
+		<filter-name>one</filter-name>
+		<filter-class>com.yedam.common.FilterOne</filter-class> <!-- 필터 구현 클래스 -->
+	</filter>
+	<filter-mapping>
+		<filter-name>one</filter-name>
+		<url-pattern>/*</url-pattern> <!-- 어떤 url이든지 상관 없이 들어오면 사용하겠다는 뜻??? -->
+	</filter-mapping>
+
 	<!-- tiles -->
 	<listener>
 		<listener-class>org.apache.tiles.extras.complete.CompleteAutoloadTilesListener</listener-class>

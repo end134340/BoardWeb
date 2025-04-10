@@ -19,7 +19,7 @@ public class EventAddControl implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.setContentType("text/json; charset=UTF-8");
+		req.setCharacterEncoding("UTF-8");
 
 		String title = req.getParameter("title");
 		String start = req.getParameter("start");
@@ -40,7 +40,7 @@ public class EventAddControl implements Control {
 		} else {
 			map.put("retCode", "NG");
 		}
-
+		
 		String json = gson.toJson(map);
 		resp.getWriter().print(json);
 

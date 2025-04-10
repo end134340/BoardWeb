@@ -2,25 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yedam.mapper.EventMapper">
 
-<insert id="insertEvent" parameterType="event">
-	INSERT INTO tbl_event (   title 
-	                        , start_date 
-	                        , end_date )
-	VALUES  (  #{title} 
-	          , #{start} 
-	          , #{end} ) 
+	<insert id="insertEvent" parameterType="event">
+		INSERT INTO tbl_event ( title
+		                        , start_date
+		                        , end_date )
+		VALUES ( #{title}
+		         , #{start}
+		         , #{end} )
+	</insert>
+
+	<delete id="deleteEvent" parameterType="String">
+		DELETE FROM tbl_event
+		WHERE title = #{title}
+	</delete>
+
+	<select id="eventList" resultType="event">
+		SELECT title
+		       , start_date AS "start"
+		       , end_date AS "end"
+		FROM tbl_event
+	</select>
+<!-- 차트 -->
+	<select id="selectWriter" resultType="map">
+		SELECT user_name AS "userName"
+		       , b.writer AS "writer"
+		       , count(1) AS "cnt"
+		FROM tbl_board b LEFT OUTER JOIN tbl_member m
+		                              ON b.writer = m.user_id
+		GROUP BY user_name, b.writer
+	</select>
+<!-- 로그 정보 -->
+<insert id="insertLogging" parameterType="map">
+	INSERT INTO tbl_logging ( log_id 
+                             , req_path 
+                             , req_host )
+    VALUES ( logging_seq.nextval 
+             , #{page} 
+             , #{host} )     
 </insert>
-
-<delete id="deleteEvent" parameterType="String" >
-	DELETE FROM tbl_event 
-	WHERE title = #{title}
-</delete>
-
-<select id="eventList" resultType="event">
-	SELECT  title 
-	        , start_date AS "start"
-	        , end_date AS "end"
-	 FROM   tbl_event  
-</select>
-
 </mapper>
