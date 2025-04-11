@@ -8,7 +8,8 @@
 	<title>gov.jsp</title>
 	<link rel="stylesheet" href="css/styles.css" />
 </head>
-시도선택: <select id="choice" class="form-control">
+시도선택:
+<select id="choice" class="form-control">
 
 </select>
 <table class="table table-striped">
@@ -24,6 +25,7 @@
 
 	</tbody>
 </table>
+<ul id="list"></ul>
 
 <body>
 	<script>
@@ -113,6 +115,7 @@
 
 		}
 	</script>
+	<script src="js/array2.js"></script>
 </body>
 
 </html>
